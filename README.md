@@ -1,42 +1,40 @@
-# Methods of Advanced Data Engineering Template Project
+> _This repository contains data engineering and data science projects and exercises using open data sources as part of the [AMSE](https://oss.cs.fau.de/teaching/specific/amse/)/[SAKI](https://oss.cs.fau.de/teaching/specific/saki/) course, taught by the [FAU Chair for Open-Source Software (OSS)](https://oss.cs.fau.de/) in the Winter 23 24semester. This repo is forked from [Data EnFineering FAU](https://github.com/jvalue/2023-amse-template)._
 
-This template project provides some structure for your open data project in the MADE module at FAU.
-This repository contains (a) a data science project that is developed by the student over the course of the semester, and (b) the exercises that are submitted over the course of the semester.
-Before you begin, make sure you have [Python](https://www.python.org/) and [Jayvee](https://github.com/jvalue/jayvee) installed. We will work with [Jupyter notebooks](https://jupyter.org/). The easiest way to do so is to set up [VSCode](https://code.visualstudio.com/) with the [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter).
+# Analyzing the Relationship Between Age Demographics and Crime Trends in Berlin Neighborhoods
 
+## Description
 
-## Project Work
-Your data engineering project will run alongside lectures during the semester. We will ask you to regularly submit project work as milestones so you can reasonably pace your work. All project work submissions **must** be placed in the `project` folder.
+<!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
+The project, titled "Analyzing the Relationship Between Age Demographics and Crime Trends in Berlin Neighborhoods," is a data science initiative aimed at uncovering the intricate connection between age demographics and crime patterns within the diverse neighborhoods of Berlin from 2012 to 2019.
 
-### Exporting a Jupyter Notebook
-Jupyter Notebooks can be exported using `nbconvert` (`pip install nbconvert`). For example, to export the example notebook to html: `jupyter nbconvert --to html examples/final-report-example.ipynb --embed-images --output final-report.html`
+This endeavor is motivated by a dual purpose: First, to contribute to the well-being of Berlin's residents by providing evidence-based insights to enhance public safety, urban planning, and social welfare efforts. Second, to empower local authorities, law enforcement, and policymakers with a data-driven framework for informed decision-making.
 
+To accomplish this, we collect and integrate two pivotal datasets – one detailing the age distribution in various Berlin neighborhoods and another outlining crime incidents spanning seven years. Our data engineering efforts encompassbuilding  data pipeline for automated collecting, storing, cleaning, transformation, and analysis of the data. 
 
-## Exercises
-During the semester you will need to complete exercises, sometimes using [Python](https://www.python.org/), sometimes using [Jayvee](https://github.com/jvalue/jayvee). You **must** place your submission in the `exercises` folder in your repository and name them according to their number from one to five: `exercise<number from 1-5>.<jv or py>`.
+The main question we seek to answer is: "How do age demographics within Berlin's population correlate with and influence crime trends across the city's neighborhoods?" By exploring this question, we aim to uncover patterns, trends, and dependencies that can guide targeted interventions for crime prevention, urban development, and social programs.
 
-In regular intervalls, exercises will be given as homework to complete during the semester. We will divide you into two groups, one completing an exercise in Jayvee, the other in Python, switching each exercise. Details and deadlines will be discussed in the lecture, also see the [course schedule](https://made.uni1.de/). At the end of the semester, you will therefore have the following files in your repository:
+Ultimately, this project serves as a valuable resource for both researchers and decision-makers, contributing to evidence-based practices that enhance the quality of life in Berlin's diverse communities.
 
-1. `./exercises/exercise1.jv` or `./exercises/exercise1.py`
-2. `./exercises/exercise2.jv` or `./exercises/exercise2.py`
-3. `./exercises/exercise3.jv` or `./exercises/exercise3.py`
-4. `./exercises/exercise4.jv` or `./exercises/exercise4.py`
-5. `./exercises/exercise5.jv` or `./exercises/exercise5.py`
+## Project Structure: ETL pipeline
+The project follows a structured ETL (Extract, Transform, Load) pipeline approach, encompassing various directories and modules with specific functionalities. The `pipeline.sh` file in the project folder serves as the entry point for running the pipeline using the command `./pipeline.sh`, resulting in the generation of the final dataset stored in an SQLite database as my_database.sqlite in the data directory.
 
-### Exercise Feedback
-We provide automated exercise feedback using a GitHub action (that is defined in `.github/workflows/exercise-feedback.yml`). 
-
-To view your exercise feedback, navigate to Actions -> Exercise Feedback in your repository.
-
-The exercise feedback is executed whenever you make a change in files in the `exercise` folder and push your local changes to the repository on GitHub. To see the feedback, open the latest GitHub Action run, open the `exercise-feedback` job and `Exercise Feedback` step. You should see command line output that contains output like this:
-
-```sh
-Found exercises/exercise1.jv, executing model...
-Found output file airports.sqlite, grading...
-Grading Exercise 1
-	Overall points 17 of 17
-	---
-	By category:
-		Shape: 4 of 4
-		Types: 13 of 13
+```bash
+project/
+├── data/                       # Data directory
+│                    
+├── pipelines/                  # Data pipeline modules
+│   ├── __init__.py
+│   └── pipeline.py             # ETL data pipeline implementation
+├── tests/                      # Test modules
+│   ├── __init__.py
+│   ├── pipilinetest.py         # Test cases for component and system testing
+├── __init__.py.                   
+├── final_report.ipynb          # Notebook for final project report
+├── pipeline.sh                 # main file to run the ETL pipeline
+├── project-plan.md             # Project plan and documentation
+└── run_pipeline.py             # defining the databases and calling the pipelines
+├── tests.sh                    # file to run all the tests.
 ```
+
+## Project Report
+See the final project [report](project/report.ipynb).
