@@ -1,4 +1,4 @@
-> _This repository contains data engineering and data science projects and exercises using open data sources as part of the [AMSE](https://oss.cs.fau.de/teaching/specific/amse/)/[SAKI](https://oss.cs.fau.de/teaching/specific/saki/) course, taught by the [FAU Chair for Open-Source Software (OSS)](https://oss.cs.fau.de/) in the Winter 23 24semester. This repo is forked from [Data EnFineering FAU](https://github.com/jvalue/2023-amse-template)._
+> _This repository contains data engineering and data science projects and exercises using open data sources as part of the [AMSE](https://oss.cs.fau.de/teaching/specific/amse/)/[SAKI](https://oss.cs.fau.de/teaching/specific/saki/) course, taught by the [FAU Chair for Open-Source Software (OSS)](https://oss.cs.fau.de/) in the Winter 23 24semester. This repo is forked from [Data Engineering FAU](https://github.com/jvalue/2023-amse-template)._
 
 # Analyzing the Relationship Between Age Demographics and Crime Trends in Berlin Neighborhoods
 
