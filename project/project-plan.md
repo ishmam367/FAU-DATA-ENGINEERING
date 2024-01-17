@@ -14,7 +14,7 @@ The project, titled "Analyzing the Relationship Between Age Demographics and Cri
 
 This endeavor is motivated by a dual purpose: First, to contribute to the well-being of Berlin's residents by providing evidence-based insights to enhance public safety, urban planning, and social welfare efforts. Second, to empower local authorities, law enforcement, and policymakers with a data-driven framework for informed decision-making.
 
-To accomplish this, we collect and integrate two pivotal datasets – one detailing the age distribution in various Berlin neighborhoods and another outlining crime incidents spanning seven years. Our data engineering efforts encompass data cleaning, transformation, and amalgamation to facilitate a comprehensive analysis. 
+To accomplish this, we collect and integrate two pivotal datasets – one detailing the age distribution in various Berlin neighborhoods and another outlining crime incidents spanning seven years. Our data engineering efforts encompassbuilding  data pipeline for automated collecting, storing, cleaning, transformation, and analysis of the data. 
 
 The main question we seek to answer is: "How do age demographics within Berlin's population correlate with and influence crime trends across the city's neighborhoods?" By exploring this question, we aim to uncover patterns, trends, and dependencies that can guide targeted interventions for crime prevention, urban development, and social programs.
 
