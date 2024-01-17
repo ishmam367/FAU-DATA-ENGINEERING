@@ -37,4 +37,4 @@ project/
 ```
 
 ## Project Report
-See the final project [report](project/report.ipynb).
+See the final [Project report](project/report.ipynb) to see the analysis
