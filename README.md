@@ -15,9 +15,11 @@ The main question we seek to answer is: "How do age demographics within Berlin's
 
 Ultimately, this project serves as a valuable resource for both researchers and decision-makers, contributing to evidence-based practices that enhance the quality of life in Berlin's diverse communities.
 
-## Project Structure: ETL pipeline
-The project follows a structured ETL (Extract, Transform, Load) pipeline approach, encompassing various directories and modules with specific functionalities. The `pipeline.sh` file in the project folder serves as the entry point for running the pipeline using the command `./pipeline.sh`, resulting in the generation of the final dataset stored in an SQLite database as my_database.sqlite in the data directory.
+## Project Structure: ETL pipeline 
+The project follows a structured ETL (Extract, Transform, Load) pipeline approach, encompassing various directories and modules with specific functionalities. The `pipeline.sh` file in the project folder serves as the entry point for running the pipeline using the command `./project.pipeline.sh` from the made_template folder, resulting in the generation of the final dataset stored in an SQLite database as my_database.sqlite in the data directory.
 
+## Running the project
+1. 
 ```bash
 project/
 ├── data/                       # Data directory
