@@ -15,11 +15,17 @@ The main question we seek to answer is: "How do age demographics within Berlin's
 
 Ultimately, this project serves as a valuable resource for both researchers and decision-makers, contributing to evidence-based practices that enhance the quality of life in Berlin's diverse communities.
 
+## Running the project
+1. Clone the repository using command 'git clone git@github.com:ishmam367/made-template.git'
+2. Run the following command to install the dependencies specified in the requirements.txt file
+: pip install -r requirements.txt
+3. to execute the pipeline, run the following command from the root directory `./project.pipeline.sh`
+4. to execute all the test run the following command from the root directory `./project.tests.sh`
+
+
 ## Project Structure: ETL pipeline 
 The project follows a structured ETL (Extract, Transform, Load) pipeline approach, encompassing various directories and modules with specific functionalities. The `pipeline.sh` file in the project folder serves as the entry point for running the pipeline using the command `./project.pipeline.sh` from the made_template folder, resulting in the generation of the final dataset stored in an SQLite database as my_database.sqlite in the data directory.
 
-## Running the project
-1. 
 ```bash
 project/
 ├── data/                       # Data directory
