@@ -1,111 +1,98 @@
-pipeline TrainPipeline {
+pipeline ZipPipeline {
 
 
-    TrainDataExtractor 
-        -> TrainDataTextFileInterpreter
-        -> TrainDataCSVInterpreter
-        -> StatusColumnRemover
-        -> TrainDataTableInterpreter
-        -> TrainDataLoader;
+     // Pipeline execution order
+    ZipDataExtractor
+    -> ZipDataArchiveInterpreter
+    -> DataFilePicker
+    -> ZipDataTextFileInterpreter
+    -> ZipDataCSVInterpreter
+    -> RenameColumn1
+    -> RenameColumn2
+    -> ColumnDeleter
+    -> ColumnDataSelector
+    -> TableInterpreter
+    -> TableTransformer1
+    -> TableTransformer2
+    -> DataLoader;
+        
 
-    
-    block TrainDataExtractor oftype HttpExtractor{
-        url : "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV" ;
+    //extract zip files from URL
+    block ZipDataExtractor oftype HttpExtractor{
+        url : "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip" ;
+    }
+    //unzip extracted files
+    block ZipDataArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
     }
 
-    block TrainDataTextFileInterpreter oftype TextFileInterpreter{}
+    block DataFilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
 
-    block TrainDataCSVInterpreter oftype CSVInterpreter {
+    block ZipDataTextFileInterpreter oftype TextFileInterpreter{}
+
+    block ZipDataCSVInterpreter oftype CSVInterpreter {
 		delimiter: ";";
 	}
-    
-    block StatusColumnRemover oftype ColumnDeleter{
-        delete: [column J];
+
+    block RenameColumn1 oftype CellWriter {
+        at: cell E1;
+        write: ["Temperatur"];
     }
 
+    block RenameColumn2 oftype CellWriter {
+        at: cell J1;
+        write: ["Batterietemperatur"];
+    }
     
-    block TrainDataTableInterpreter oftype TableInterpreter {
-		header: true;
-		columns: [
-			"EVA_NR" oftype integer,
-			"DS100" oftype text,
-			"IFOPT" oftype ValidIFOPT,//text
-			"NAME" oftype text,
-			"Verkehr" oftype ValidVerkehr,//text
-			"Laenge" oftype GeographicData,
-			"Breite" oftype GeographicData,
-			"Betreiber_Name" oftype text,
-			"Betreiber_Nr" oftype integer
-		];
+   block ColumnDeleter oftype ColumnDeleter {
+        delete: [column F, column G, column H, column I];
     }
 
-    block TrainDataLoader oftype SQLiteLoader {
-		table: "trainstops";
-		file: "./trainstops.sqlite";
-	}
-
-
-}
+    // Selects a range of cells from the data
+    block ColumnDataSelector oftype CellRangeSelector {
+        select: range A1:K*;
+    }
 
 
 
+    // Interprets the selected data as a table without headers
+    block TableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+        "Geraet" oftype integer,
+        "Hersteller" oftype text,
+        "Model" oftype text,
+        "Monat" oftype integer,
+        "Temperatur" oftype decimal,
+        "Batterietemperatur" oftype decimal,
+        "Geraet aktiv" oftype text,
+        ];
+    }
 
-
-valuetype ValidIFOPT oftype text{
-    
-    constraints: [
-        
-        IPv4Format,
-        // there are more constraings which I don't understand
-    ];
-}
-
-valuetype ValidVerkehr oftype text {
+    block TableTransformer1 oftype TableTransformer {
+        inputColumns: ['Temperatur'];
+        outputColumn: 'Temperatur';
+        use: CelsiusToFahrenheit;
+    }
+ 
+    block TableTransformer2 oftype TableTransformer {
+        inputColumns: ['Batterietemperatur'];
+        outputColumn: 'Batterietemperatur';
+        use: CelsiusToFahrenheit;
+    }
    
-    constraints: [
-
-        AllowedVerkherList,
-        
-   
-    ];
+    block DataLoader oftype SQLiteLoader {
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+        dropTable: false;
+    }
 }
 
-
-valuetype GeographicData oftype decimal {
-    constraints: [
-        
-        
-        GeographicalCoordinates,
-    
-    ];
-}
-
-
-//constraint NoEmptyCell on text:
-   // value.length > 0;
-
-
-constraint IPv4Format oftype RegexConstraint {
-    regex: /[a-z]{2}:\d+:\d+(:\d+)?/;
-  // regex: /^[A-Za-z]{2}:\d*:\d*(?::\d*)?$/;
- }
-
-//constraint GeographicalCoordinates on text:
-    //value matches /[-90-90]/;
-
-constraint GeographicalCoordinates oftype RangeConstraint {
-   lowerBound: -90;
-   upperBound: 90;
-   lowerBoundInclusive: true;
-   upperBoundInclusive: true;
-    
- }
-constraint AllowedVerkherList oftype AllowlistConstraint {
-    allowlist: ["FV", "RV", "nur DPN"];
-}
-
-
-//constraint AllowedVerkherList on text:
-   // value in [
-       // "FV", "RV", "nurDPN", 
-   // ];
+// Transformation definition to convert Celsius to Fahrenheit
+transform CelsiusToFahrenheit {
+    from tempCelsius oftype decimal;
+    to tempFahrenheit oftype decimal;
+    tempFahrenheit: (tempCelsius * 9/5) + 32;
+  }
