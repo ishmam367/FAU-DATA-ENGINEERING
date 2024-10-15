@@ -27,8 +27,7 @@ Ultimately, this project serves as a valuable resource for both researchers and 
 The project follows a structured ETL (Extract, Transform, Load) pipeline approach, encompassing various directories and modules with specific functionalities. The `pipeline.sh` file in the project folder serves as the entry point for running the pipeline using the command `./project.pipeline.sh` from the made_template folder, resulting in the generation of the final dataset stored in an SQLite database as my_database.sqlite in the data directory.
 
 ```bash
-project/
-├── data/                       # Data directory
+project/                       
 │                    
 ├── pipelines/                  # Data pipeline modules
 │   ├── __init__.py
