@@ -44,5 +44,10 @@ project/
 ├── tests.sh                    # file to run all the tests.
 ```
 
+**Continuous Integration Pipeline using GitHub Action:**
+A Continuous Integration pipeline has been implemented using a GitHub action defined in [.github/workflows/ci-tests.yml](.github/workflows/Project_CI_Test.yml). This pipeline is triggered whenever changes are made to the `project/` directory  and pushed to the GitHub repository, or when a pull request is created and merged into the `main` branch. It Installs the required Python packages listed in requirements.txt using pip, Creates a kaggle.json file with credentials stored in a GitHub secret (KAGGLE) using jsdaniell/create-json@v1.2.2.
+Grants execution permissions to a test script (tests.sh) and runs it to execute the project's tests.
+This workflow is designed to automate the testing process upon code pushes, ensuring the project dependencies are installed and tests are run.
+
 ## Project Report
 See the final [Project report](project/report.ipynb) to see the analysis
